@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nishtha Dhamija | Personal Portfolio</title>
+  <style>
+    :root {
+      --bg: #f8f7ff;
+      --surface: #ffffff;
+      --text: #202038;
+      --muted: #686880;
+      --primary: #7257e8;
+      --primary-dark: #563bc7;
+      --accent: #f0eaff;
+      --border: #e8e5f4;
+      --shadow: 0 14px 40px rgba(50, 35, 100, .09);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, 90%); margin: auto; }
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(248,247,255,.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .logo { font-size: 1.25rem; font-weight: 800; color: var(--primary); letter-spacing: -.5px; }
+    .nav-links { display: flex; gap: 24px; list-style: none; align-items: center; }
+    .nav-links a { font-size: .94rem; color: var(--muted); font-weight: 600; }
+    .nav-links a:hover { color: var(--primary); }
+    .menu-btn { display: none; border: 0; background: var(--accent); color: var(--primary-dark); padding: 9px 12px; border-radius: 10px; font-size: 1.1rem; cursor: pointer; }
+    section { padding: 82px 0; scroll-margin-top: 75px; }
+    .hero { padding: 92px 0 82px; }
+    .hero-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 48px; align-items: center; }
+    .eyebrow { display: inline-block; color: var(--primary-dark); background: var(--accent); padding: 7px 13px; border-radius: 999px; font-weight: 700; font-size: .85rem; margin-bottom: 18px; }
+    h1 { font-size: clamp(2.6rem, 6vw, 4.7rem); line-height: 1.08; letter-spacing: -2px; margin-bottom: 20px; }
+    h1 span { color: var(--primary); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 610px; margin-bottom: 28px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+    .btn { display: inline-block; padding: 12px 20px; border-radius: 12px; font-weight: 700; border: 1px solid var(--primary); transition: .2s; cursor: pointer; }
+    .btn-primary { color: #fff; background: var(--primary); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+    .btn-outline { color: var(--primary); background: transparent; }
+    .btn-outline:hover { background: var(--accent); }
+    .profile-card { background: linear-gradient(145deg, #e9e2ff, #fff 75%); border: 1px solid var(--border); border-radius: 30px; padding: 28px; box-shadow: var(--shadow); text-align: center; }
+    .avatar { width: 190px; height: 190px; border-radius: 50%; margin: 4px auto 22px; display: grid; place-items: center; background: linear-gradient(135deg, var(--primary), #b49cff); color: white; font-size: 4rem; font-weight: 800; border: 8px solid rgba(255,255,255,.8); }
+    .profile-card h2 { font-size: 1.3rem; margin-bottom: 5px; }
+    .profile-card p { color: var(--muted); font-size: .95rem; }
+    .section-head { margin-bottom: 34px; }
+    .section-head .tag { color: var(--primary); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: .78rem; }
+    h2.section-title { font-size: clamp(2rem, 4vw, 2.8rem); letter-spacing: -1px; margin: 6px 0 10px; }
+    .section-head p { color: var(--muted); max-width: 680px; }
+    .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 26px; box-shadow: var(--shadow); }
+    .card p { color: var(--muted); }
+    .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fact { background: var(--accent); padding: 18px; border-radius: 15px; }
+    .fact strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .fact span { color: var(--muted); font-size: .9rem; }
+    .skills-grid, .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .skill-card .icon { font-size: 1.7rem; margin-bottom: 12px; }
+    .skill-card h3, .project-card h3 { margin-bottom: 8px; }
+    .skill-card p, .project-card p { font-size: .94rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+    .chip { background: var(--accent); color: var(--primary-dark); padding: 6px 10px; border-radius: 8px; font-size: .82rem; font-weight: 700; }
+    .project-card { display: flex; flex-direction: column; }
+    .project-label { display: inline-block; align-self: flex-start; color: var(--primary-dark); background: var(--accent); padding: 5px 9px; border-radius: 7px; font-size: .78rem; font-weight: 800; margin-bottom: 12px; }
+    .project-card p { flex: 1; }
+    .experience { border-left: 3px solid var(--primary); padding: 2px 0 2px 24px; }
+    .experience h3 { margin-bottom: 5px; }
+    .experience .meta { color: var(--primary); font-weight: 700; font-size: .9rem; margin-bottom: 12px; }
+    .experience ul { color: var(--muted); padding-left: 20px; }
+    .experience li { margin: 7px 0; }
+    .contact-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 24px; }
+    .contact-item { margin-top: 18px; }
+    .contact-item strong { display: block; margin-bottom: 3px; }
+    .contact-item span { color: var(--muted); }
+    form { display: grid; gap: 13px; }
+    input, textarea { width: 100%; padding: 13px 14px; border: 1px solid var(--border); border-radius: 11px; font: inherit; background: #fdfcff; color: var(--text); }
+    input:focus, textarea:focus { outline: 2px solid #d9ceff; border-color: var(--primary); }
+    textarea { min-height: 130px; resize: vertical; }
+    .form-note { color: var(--muted); font-size: .85rem; }
+    footer { padding: 24px 0; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: .9rem; }
+    .top-link { position: fixed; right: 20px; bottom: 20px; background: var(--primary); color: white; width: 42px; height: 42px; border-radius: 13px; display: grid; place-items: center; box-shadow: var(--shadow); }
+    @media (max-width: 800px) {
+      .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .profile-card { max-width: 430px; margin: auto; width: 100%; }
+      .skills-grid, .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero { padding-top: 62px; }
+    }
+    @media (max-width: 560px) {
+      .menu-btn { display: block; }
+      .nav-links { display: none; position: absolute; top: 71px; left: 0; width: 100%; padding: 18px 5%; background: var(--bg); border-bottom: 1px solid var(--border); flex-direction: column; align-items: flex-start; gap: 15px; }
+      .nav-links.open { display: flex; }
+      .skills-grid, .project-grid, .facts { grid-template-columns: 1fr; }
+      section { padding: 62px 0; }
+      h1 { letter-spacing: -1px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a class="logo" href="#home">Nishtha.</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">BBA Student · Aspiring Professional</span>
+          <h1>Hi, I'm <span>Nishtha Dhamija.</span></h1>
+          <p>I’m a BBA student at Poornima University, interested in business, communication, event coordination, and digital creativity. I enjoy learning new skills and turning ideas into well-organised work.</p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#projects">Explore My Work</a>
+            <a class="btn btn-outline" href="#contact">Contact Me</a>
+          </div>
+        </div>
+        <aside class="profile-card">
+          <div class="avatar" aria-label="Nishtha initials">ND</div>
+          <h2>Nishtha Dhamija</h2>
+          <p>Bachelor of Business Administration</p>
+          <p>Poornima University</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <span class="tag">Get to know me</span>
+          <h2 class="section-title">About Me</h2>
+          <p>A quick introduction to my education, interests, and learning journey.</p>
+        </div>
+        <div class="about-grid">
+          <div class="card">
+            <p>I am pursuing a Bachelor of Business Administration (BBA) at Poornima University. Through my studies and internship exposure, I have been developing my communication, coordination, and organisational skills. I am eager to gain practical experience, learn from new challenges, and grow professionally.</p>
+            <br />
+            <p>My interests include event management, marketing, business operations, website creation, and learning digital tools.</p>
+          </div>
+          <div class="facts">
+            <div class="fact"><strong>Education</strong><span>BBA</span></div>
+            <div class="fact"><strong>University</strong><span>Poornima University</span></div>
+            <div class="fact"><strong>Interest</strong><span>Event Coordination</span></div>
+            <div class="fact"><strong>Focus</strong><span>Learning & Growth</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <span class="tag">What I bring</span>
+          <h2 class="section-title">My Skills & Interests</h2>
+          <p>Skills and areas I have worked on or am interested in developing further.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="card skill-card">
+            <div class="icon">💬</div><h3>Communication</h3>
+            <p>Professional conversations, invitations, and follow-ups.</p>
+            <div class="chips"><span class="chip">Calling</span><span class="chip">Follow-up</span></div>
+          </article>
+          <article class="card skill-card">
+            <div class="icon">📋</div><h3>Coordination</h3>
+            <p>Supporting pre-event activities, registration, and hospitality planning.</p>
+            <div class="chips"><span class="chip">Organisation</span><span class="chip">Teamwork</span></div>
+          </article>
+          <article class="card skill-card">
+            <div class="icon">📈</div><h3>Business & Marketing</h3>
+            <p>Academic learning in management, branding, and marketing communication.</p>
+            <div class="chips"><span class="chip">BBA</span><span class="chip">Marketing</span></div>
+          </article>
+          <article class="card skill-card">
+            <div class="icon">💻</div><h3>Web Basics</h3>
+            <p>Learning to build simple, responsive websites using web technologies.</p>
+            <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+          </article>
+          <article class="card skill-card">
+            <div class="icon">🗂️</div><h3>Digital Tools</h3>
+            <p>Exploring portals, online forms, spreadsheets, and automation tools.</p>
+            <div class="chips"><span class="chip">Organisation</span><span class="chip">Digital Learning</span></div>
+          </article>
+          <article class="card skill-card">
+            <div class="icon">🌱</div><h3>Personal Growth</h3>
+            <p>Adaptability, willingness to learn, and improving through practice.</p>
+            <div class="chips"><span class="chip">Learning</span><span class="chip">Problem-solving</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <span class="tag">My learning journey</span>
+          <h2 class="section-title">Projects & Academic Work</h2>
+          <p>A selection of areas connected with my studies and practical learning.</p>
+        </div>
+        <div class="project-grid">
+          <article class="card project-card">
+            <span class="project-label">Internship</span>
+            <h3>Event Operations Support</h3>
+            <p>Practical exposure to pre-event coordination, hosted-buyer and exhibitor calls, follow-ups, accommodation planning support, and registration desk activities.</p>
+            <div class="chips"><span class="chip">Coordination</span><span class="chip">Events</span></div>
+          </article>
+          <article class="card project-card">
+            <span class="project-label">Web Development</span>
+            <h3>Personal Portfolio Website</h3>
+            <p>A responsive single-page website made with HTML, CSS, and JavaScript to present my profile, skills, projects, and contact section.</p>
+            <div class="chips"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span></div>
+          </article>
+          <article class="card project-card">
+            <span class="project-label">Academic Project</span>
+            <h3>Business & Marketing Assignments</h3>
+            <p>Coursework covering branding, integrated marketing communication, service marketing, management, and business concepts.</p>
+            <div class="chips"><span class="chip">Research</span><span class="chip">Marketing</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <span class="tag">Practical exposure</span>
+          <h2 class="section-title">Internship Experience</h2>
+          <p>My internship helped me understand how planning and communication support event operations.</p>
+        </div>
+        <div class="card">
+          <div class="experience">
+            <h3>Intern — Coverwell ID Co.</h3>
+            <div class="meta">Event Management · 3-month summer internship</div>
+            <ul>
+              <li>Learned how the event portal was used to manage event-related information and workflow.</li>
+              <li>Contacted hosted buyers and exhibitors to invite them to events, explain details, and follow up when needed.</li>
+              <li>Supported stay and accommodation planning for hosted buyers and invited participants.</li>
+              <li>For KCE, contacted agents and associates as part of event coordination.</li>
+              <li>Assisted with registration desk activities during events, including JAGS, JAS, JFF, and KCE.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="section-head">
+          <span class="tag">Let's connect</span>
+          <h2 class="section-title">Contact Me</h2>
+          <p>Interested in connecting about learning opportunities, projects, or collaboration? Send a message below.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="card">
+            <h3>Get in touch</h3>
+            <p style="margin-top:8px">My contact details can be added here so people can reach me professionally.</p>
+            <div class="contact-item"><strong>Email</strong><span>Add your email address</span></div>
+            <div class="contact-item"><strong>LinkedIn</strong><span>Add your LinkedIn profile</span></div>
+            <div class="contact-item"><strong>Location</strong><span>Jaipur, Rajasthan, India</span></div>
+          </div>
+          <div class="card">
+            <form id="contactForm">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" placeholder="Enter your name" required />
+              <label for="email">Your email</label>
+              <input id="email" name="email" type="email" placeholder="Enter your email" required />
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Write your message..." required></textarea>
+              <button class="btn btn-primary" type="submit">Prepare Email</button>
+              <p class="form-note">This demo opens your email app; it does not send or store messages on this website.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">© <span id="year"></span> Nishtha Dhamija · Personal Portfolio</div>
+  </footer>
+  <a class="top-link" href="#home" aria-label="Back to top">↑</a>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.textContent = isOpen ? '✕' : '☰';
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.textContent = '☰';
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    document.getElementById('contactForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const yourEmail = ''; // Add your own email address between the quotes.
+      const subject = encodeURIComponent('Portfolio contact from ' + name);
+      const body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\n\nMessage:\n' + message);
+      if (!yourEmail) {
+        alert('Please add your email address in the contact section and in the JavaScript variable named yourEmail to receive messages.');
+        return;
+      }
+      window.location.href = 'mailto:' + yourEmail + '?subject=' + subject + '&body=' + body;
+    });
+  </script>
+</body>
+</html>
